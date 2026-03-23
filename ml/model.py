@@ -63,9 +63,9 @@ def inference(model, X):
         Predictions from the model.
     """
     # DONE: implement the function
-    predictions = model.predict(X)
-    probabilities = model.predict_proba(X)
-    return predictions, probabilities
+    preds = model.predict(X)
+    #probabilities = model.predict_proba(X)
+    return preds
 
 def save_model(model, path):
     """ Serializes model to a file.
@@ -83,7 +83,7 @@ def save_model(model, path):
 
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
-    # TODO: implement the function
+    # DONE: implement the function
     with open(path, 'rb') as file:
         model = pickle.load(file)
     return model
