@@ -2,7 +2,6 @@ import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
 # TODO: add necessary import
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
 # Optional: implement hyperparameter tuning.
