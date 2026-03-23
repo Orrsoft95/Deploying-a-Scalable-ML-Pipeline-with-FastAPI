@@ -21,9 +21,9 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    # TODO: implement the function
+    # DONE: implement the function
     model = RandomForestClassifier(random_state=42)
-    return model.fit(X_train, y_train)
+    return model.fit(X_train, y_train) 
 
 
 def compute_model_metrics(y, preds):
@@ -53,7 +53,7 @@ def inference(model, X):
 
     Inputs
     ------
-    model : ???
+    model : RandomForestClassifier
         Trained machine learning model.
     X : np.array
         Data used for prediction.
@@ -62,8 +62,10 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    # TODO: implement the function
-    pass
+    # DONE: implement the function
+    predictions = model.predict(X)
+    probabilities = model.predict_proba(X)
+    return predictions, probabilities
 
 def save_model(model, path):
     """ Serializes model to a file.
@@ -76,7 +78,8 @@ def save_model(model, path):
         Path to save pickle file.
     """
     # TODO: implement the function
-    pass
+    with open(path, 'wb') as file:
+        pickle.dump(model, file)
 
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
