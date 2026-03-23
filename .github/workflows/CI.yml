@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+
+    - name: Set up Conda environment
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        environment-file: environment.yml
+        activate-environment: fastapi
+        python-version: "3.10"
+        auto-activate-base: false
+
+    - name: Run flake8
+      shell: bash -el {0}
+      run: flake8 .
+
+    - name: Run pytest
+      shell: bash -el {0}
+      run: pytest
+
+    - name: Notify on Failure
+      if: failure()
+      run: echo "CI Failed - code did not pass testing (flake8 or pytest). Please review logs!"
+
+    
+    
+
