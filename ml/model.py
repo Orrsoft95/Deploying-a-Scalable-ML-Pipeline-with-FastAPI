@@ -37,7 +37,7 @@ def train_model(X_train, y_train):
         estimator=base_model,
         param_grid=param_grid,
         cv=5,
-        error_score='f1', #optimize for f1 score
+        scoring='f1', #optimize for f1 score
         n_jobs=-1,
         verbose=1,
     )
