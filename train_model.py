@@ -12,15 +12,22 @@ from ml.model import (
     save_model,
     train_model,
 )
-# TODO: load the cencus.csv data
-project_path = "Your path here"
+# DONE: load the cencus.csv data
+project_path = os.getcwd() #store current working directory
 data_path = os.path.join(project_path, "data", "census.csv")
 print(data_path)
-data = None # your code here
+data = pd.read_csv(data_Path)
 
-# TODO: split the provided data to have a train dataset and a test dataset
+# DONE: split the provided data to have a train dataset and a test dataset
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = None, None# Your code here
+X = data.drop(columns=["salary"]) #remove salary column from predictors
+y = data["salary"] #aim to predict salary
+train, test = train_test_split(
+    X,
+    y,
+    random_state=42,
+    test_size=0.2,
+)
 
 # DO NOT MODIFY
 cat_features = [
