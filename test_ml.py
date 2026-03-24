@@ -2,15 +2,19 @@ import pytest
 # TODO: add necessary import
 import pandas as pd
 from sklearn.metrics import precision_score, recall_score, f1_score
+from sklearn.ensemble import RandomForestClassifier
 import os
+from ml.model import load_model
 
 PRECISION_THRESHOLD = 0.75
 RECALL_THRESHOLD = 0.55
 F1_THRESHOLD = 0.60
 
-project_path = os.getcwd() #store current working directory
-y_path = os.path.join(project_path, "data", "y_test.csv")
-preds_path = os.path.join(project_path, "data", "preds.csv")
+project_path = os.getcwd()
+data_path = os.path.join(project_path, "data") #store current working directory
+y_path = os.path.join(data_path, "y_test.csv")
+preds_path = os.path.join(data_path, "preds.csv")
+model_path = os.path.join(project_path, "model", "model.pkl")
 
 @pytest.fixture
 def y():
@@ -19,6 +23,10 @@ def y():
 @pytest.fixture
 def preds():
     return pd.read_csv(preds_path).squeeze()
+
+@pytest.fixture
+def model():
+    return load_model(model_path)
 
 
 # DONE: implement the first test. Change the function name and input as needed
@@ -49,13 +57,19 @@ def test_model_classification_metrics(y, preds):
     )
 
 
-# TODO: implement the second test. Change the function name and input as needed
-def test_two():
+# DONE: implement the second test. Change the function name and input as needed
+def test_expected_algorithm(model):
     """
-    # add description for the second test
+    # Test to confirm that the model uses the expected algorithm: random forest classification.
+    Inputs
+    ------
+    model: the ML model saved in model folder
     """
-    # Your code here
-    pass
+
+    assert isinstance(model, RandomForestClassifier), (
+        f"Expected Random Forest Classifier model, but got {type(model).__name__} instead."
+    )
+    
 
 
 # TODO: implement the third test. Change the function name and input as needed
