@@ -20,11 +20,8 @@ data = pd.read_csv(data_path)
 
 # DONE: split the provided data to have a train dataset and a test dataset
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
-X = data.drop(columns=["salary"]) #remove salary column from predictors
-y = data["salary"] #aim to predict salary
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
+train, test = train_test_split(
+    data,
     random_state=42,
     test_size=0.2,
 )
@@ -96,7 +93,8 @@ for col in cat_features:
             column_name=col,
             slice_value=slicevalue,
             categorical_features=cat_features,
-            model=model
+            model=model,
+            label="salary"
         )
         with open("slice_output.txt", "a") as f:
             print(f"{col}: {slicevalue}, Count: {count:,}", file=f)
