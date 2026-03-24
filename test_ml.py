@@ -2,10 +2,23 @@ import pytest
 # TODO: add necessary import
 import pandas as pd
 from sklearn.metrics import precision_score, recall_score, f1_score
+import os
 
 PRECISION_THRESHOLD = 0.75
 RECALL_THRESHOLD = 0.55
 F1_THRESHOLD = 0.60
+
+project_path = os.getcwd() #store current working directory
+y_path = os.path.join(project_path, "data", "y_test.csv")
+preds_path = os.path.join(project_path, "data", "preds.csv")
+
+@pytest.fixture
+def y():
+    return pd.read_csv(y_path).squeeze()
+
+@pytest.fixture
+def preds():
+    return pd.read_csv(preds_path).squeeze()
 
 
 # DONE: implement the first test. Change the function name and input as needed

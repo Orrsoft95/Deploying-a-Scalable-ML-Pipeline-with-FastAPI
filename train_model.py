@@ -79,6 +79,18 @@ preds = inference(
     X=X_test
 )
 
+# FOR USE IN PYTEST; SAVE y_test AND preds AS .csv FILES
+parent_path = os.path.join(project_path, "data")
+pd.Series(y_test).to_csv(
+    os.path.join(parent_path, "y_test.csv"),
+    index=False
+)
+pd.Series(preds).to_csv(
+    os.path.join(parent_path, "preds.csv"),
+    index=False
+)
+
+
 # Calculate and print the metrics
 p, r, fb = compute_model_metrics(y_test, preds)
 print(f"Precision: {p:.4f} | Recall: {r:.4f} | F1: {fb:.4f}")
