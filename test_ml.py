@@ -15,6 +15,7 @@ data_path = os.path.join(project_path, "data") #store current working directory
 y_path = os.path.join(data_path, "y_test.csv")
 preds_path = os.path.join(data_path, "preds.csv")
 model_path = os.path.join(project_path, "model", "model.pkl")
+census_path = os.path.join(data_path, "census.csv")
 
 @pytest.fixture
 def y():
@@ -27,6 +28,10 @@ def preds():
 @pytest.fixture
 def model():
     return load_model(model_path)
+
+@pytest.fixture
+def census():
+    return pd.read_csv(census_path)
 
 
 # DONE: implement the first test. Change the function name and input as needed
@@ -72,10 +77,27 @@ def test_expected_algorithm(model):
     
 
 
-# TODO: implement the third test. Change the function name and input as needed
-def test_three():
+# DONE: implement the third test. Change the function name and input as needed
+def test_age_range(census):
     """
-    # add description for the third test
+    # Test to confirm that the census data contains no ages lower than 14 (min. legal working age in USA) or greater than 122 (oldest recorded person in history).
+    Inputs
+    ------
+    census: pd.DataFrame
+        census data loaded into a dataframe.
     """
-    # Your code here
-    pass
+    min_age = 14
+    max_age = 122
+
+    ages_below_min = census[census["age"] < min_age]
+    ages_above_max = census[census["age"] > max_age]
+
+    assert len(ages_below_min) == 0, (
+        f"Found {len(ages_below_min)} records with age below minimum working age."
+        f"Indices: {ages_below_min.index.toList()}"
+    )
+
+    assert len(ages_above_max) == 0, (
+        f"Found {len(ages_above_max)} records with age above maximum valid age of {max_age}."
+        f"Indices: {ages_above_max.index.toList()}"
+    )
