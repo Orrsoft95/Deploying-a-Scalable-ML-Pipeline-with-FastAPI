@@ -22,7 +22,7 @@ data = pd.read_csv(data_path)
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 X = data.drop(columns=["salary"]) #remove salary column from predictors
 y = data["salary"] #aim to predict salary
-train, test = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
     random_state=42,
