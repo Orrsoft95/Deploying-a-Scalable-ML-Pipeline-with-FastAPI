@@ -95,7 +95,9 @@ for col in cat_features:
             slice_value=slicevalue,
             categorical_features=cat_features,
             model=model,
-            label="salary"
+            label="salary",
+            encoder=encoder,
+            lb=lb
         )
         with open("slice_output.txt", "a") as f:
             print(f"{col}: {slicevalue}, Count: {count:,}", file=f)
