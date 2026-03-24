@@ -42,6 +42,7 @@ cat_features = [
 X_train, y_train, encoder, lb = process_data(
     X=train, # use the train dataset
     categorical_features=cat_features,
+    label="salary",
     training=True # use training=True
     # do not need to pass encoder and lb as input
     )
@@ -74,7 +75,7 @@ model = load_model(
 
 # DONE: use the inference function to run the model inferences on the test dataset.
 preds = inference(
-    model=test,
+    model=model,
     X=X_test
 )
 
