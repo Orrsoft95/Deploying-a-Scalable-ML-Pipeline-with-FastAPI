@@ -16,7 +16,7 @@ from ml.model import (
 project_path = os.getcwd() #store current working directory
 data_path = os.path.join(project_path, "data", "census.csv")
 print(data_path)
-data = pd.read_csv(data_Path)
+data = pd.read_csv(data_path)
 
 # DONE: split the provided data to have a train dataset and a test dataset
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
