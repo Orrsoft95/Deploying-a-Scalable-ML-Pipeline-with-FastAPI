@@ -43,7 +43,9 @@ def train_model(X_train, y_train):
     )
 
     #fit on training data!
-    grid_search.fit(X_train, y_train) 
+    grid_search.fit(X_train, y_train)
+
+    print(f"The best parameters for this model are: {grid_search.best_params_}")
 
     #Train a new model using the best parameters that we found
     model = RandomForestClassifier(
@@ -143,7 +145,7 @@ def performance_on_categorical_slice(
         Trained sklearn OneHotEncoder, only used if training=False.
     lb : sklearn.preprocessing._label.LabelBinarizer
         Trained sklearn LabelBinarizer, only used if training=False.
-    model : ???
+    model : Random Forest Classifier
         Model used for the task.
 
     Returns
