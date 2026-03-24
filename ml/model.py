@@ -23,10 +23,10 @@ def train_model(X_train, y_train):
     """
     # DONE: implement the function
     param_grid = {
-        'n_estimators': [100, 200, 250, 300],
-        'max_depth': [10, 20, 30, 50],
-        'min_samples_split': [2, 5, 10, 20],
-        'min_samples_leaf': [1, 2, 4, 10]
+        'n_estimators': [100, 200, 250],
+        'max_depth': [10, 20, 30],
+        'min_samples_split': [2, 5, 10],
+        'min_samples_leaf': [2, 3, 5]
     }
 
     #Instantiate a base Random Forest model
@@ -36,7 +36,7 @@ def train_model(X_train, y_train):
     grid_search = GridSearchCV(
         estimator=base_model,
         param_grid=param_grid,
-        cv=5,
+        cv=4,
         scoring='f1', #optimize for f1 score
         n_jobs=-1,
         verbose=1,
